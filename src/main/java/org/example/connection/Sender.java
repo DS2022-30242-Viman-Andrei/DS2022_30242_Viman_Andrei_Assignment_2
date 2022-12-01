@@ -48,17 +48,17 @@ public class Sender {
         {
             String message = line.split(",")[0];
 
-            UUID id = null;
-            if (decision % 2 == 0){
-                id = config.getIdDevice1();
-            }
-            else {
-                id = config.getIdDevice2();
-            }
+//            UUID id = null;
+//            if (decision % 2 == 0){
+//                id = config.getIdDevice1();
+//            }
+//            else {
+//                id = config.getIdDevice2();
+//            }
+//
+//            decision++;
 
-            decision++;
-
-            Measure measure = new Measure(id,
+            Measure measure = new Measure(config.getIdDevice1(),
                     Float.parseFloat(message),
                     Timestamp.from(Instant.now()));
 

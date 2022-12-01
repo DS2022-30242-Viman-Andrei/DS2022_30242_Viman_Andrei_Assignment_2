@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public class Config {
     private static final String fileName = "src/main/resources/config.properties";
+
     private static String TASK_QUEUE_NAME;
 
     private static String HOST_NAME;
