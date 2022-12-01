@@ -1,21 +1,45 @@
 package org.example.configuration;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.UUID;
 
 public class Config {
-    private static final String TASK_QUEUE_NAME = "task_queue";
+    private static final String fileName = "src/main/resources/config.properties";
+    private static String TASK_QUEUE_NAME;
 
-    private static final String HOST_NAME = "goose.rmq2.cloudamqp.com";
+    private static String HOST_NAME;
 
-    private static final String USERNAME = "xobhpwib";
+    private static String USERNAME;
 
-    private static final String VIRTUAL_HOST_NAME = "xobhpwib";
+    private static String VIRTUAL_HOST_NAME;
 
-    private static final String PASSWORD = "8RHcJT0dX2MSYo8NALRPfnxzf7Aw6ab-";
+    private static String PASSWORD;
 
-    private static final UUID idDevice1 = UUID.fromString("3914cfb3-be8e-4aab-a0c4-f2e984a68be3");
+    private static UUID idDevice1;
 
-    private static final UUID idDevice2 = UUID.fromString("c8cc7a39-b04f-4ef3-9cc9-3706f048e31b");
+    private static UUID idDevice2;
+
+    public Config() {
+        Properties properties = new Properties();
+
+        try (FileInputStream file = new FileInputStream(fileName)) {
+            properties.load(file);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        this.TASK_QUEUE_NAME = properties.getProperty("queue.queue_name");
+        this.HOST_NAME = properties.getProperty("queue.host_name");
+        this.USERNAME = properties.getProperty("queue.username");
+        this.VIRTUAL_HOST_NAME = properties.getProperty("queue.virtual_host_name");
+        this.PASSWORD = properties.getProperty("queue.password");
+        System.out.println(properties.getProperty("device.id1"));
+        this.idDevice1 = UUID.fromString(properties.getProperty("device.id1"));
+        this.idDevice2 = UUID.fromString(properties.getProperty("device.id2"));
+
+    }
 
     public  String getTaskQueueName() {
         return TASK_QUEUE_NAME;
