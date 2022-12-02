@@ -48,17 +48,17 @@ public class Sender {
         {
             String message = line.split(",")[0];
 
-//            UUID id = null;
-//            if (decision % 2 == 0){
-//                id = config.getIdDevice1();
-//            }
-//            else {
-//                id = config.getIdDevice2();
-//            }
-//
-//            decision++;
+            UUID id = null;
+            if (decision % 2 == 0){
+                id = config.getIdDevice1();
+            }
+            else {
+                id = config.getIdDevice2();
+            }
 
-            Measure measure = new Measure(config.getIdDevice1(),
+            decision++;
+
+            Measure measure = new Measure(id,
                     Float.parseFloat(message),
                     Timestamp.from(Instant.now()));
 
@@ -68,7 +68,7 @@ public class Sender {
                     object.getBytes());
 
             System.out.println(" [x] Sent '" + object + "'");
-            Thread.sleep(6000);
+            Thread.sleep(1000);
         }
     }
 
